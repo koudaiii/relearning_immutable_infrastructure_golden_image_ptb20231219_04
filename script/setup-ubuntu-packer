@@ -1,0 +1,33 @@
+#!/bin/bash
+
+set -e
+
+az_region=japaneast
+az_resource_group=ubuntu_relearning_immutable_infrastructure_golden_image_ptb20231219_04
+az_image_gallery=ig_ubuntu_relearning_immutable_infrastructure_golden_image_ptb20231219_04
+az_image_def_name=ubuntu-base
+
+az login
+
+az provider register -n Microsoft.VirtualMachineImages
+az provider register -n Microsoft.Compute
+az provider register -n Microsoft.KeyVault
+az provider register -n Microsoft.Storage
+az provider register -n Microsoft.Network
+
+az group create -n $az_resource_group -l $az_region
+
+az sig create \
+    -g $az_resource_group \
+    --gallery-name $az_image_gallery
+
+az sig image-definition create \
+   -g $az_resource_group \
+   --gallery-name $az_image_gallery \
+   --gallery-image-definition $az_image_def_name \
+   --publisher myIbPublisherUbuntu \
+   --offer myOfferUbuntu \
+   --sku mySKUUbuntu \
+   --hyper-v-generation V2 \
+   --os-type Linux
+

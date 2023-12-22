@@ -1,0 +1,7 @@
+az_region          = "japaneast"
+az_resource_group  = "relearning_immutable_infrastructure_golden_image_ptb20231219_04"    # Must already exist
+az_image_gallery   = "ig-relearning_immutable_infrastructure_golden_image_ptb20231219_04" # Must already exist
+az_subscription_id = "<subscription_id>"             # Must already exist
+department         = "Platform"
+owner              = "image.engineer"
+prefix             = "packer"
